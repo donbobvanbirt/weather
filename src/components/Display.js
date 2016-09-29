@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import WeatherActions from '../actions/WeatherActions'
 import WeatherStore from '../stores/WeatherStore'
 import Location from './Location'
+import Conditions from './Conditions'
 
 export default class Display extends Component {
   constructor() {
@@ -34,12 +35,18 @@ export default class Display extends Component {
 
   render() {
     let display_location = {};
+    let current_observation = {};
     if (this.state.conditions) {
       display_location = this.state.conditions.data.current_observation.display_location;
+      current_observation = this.state.conditions.data.current_observation;
+      console.log('current_observation', current_observation);
     }
 
     return (
-      <Location location={display_location}/>
+      <div>
+        <Location location={display_location}/>
+        <Conditions observ={current_observation}/>
+      </div>
     )
   }
 }
